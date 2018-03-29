@@ -28,13 +28,15 @@ fi
 # user="Venkatt"
 # referenced inside the template.txt as $user
 # render_template /path/to/template.txt > path/to/configuration_file
-function renderTemplate() {
+function renderTemplate() 
+{
     eval "echo \"$(cat $1)\""
 }
 
-function generateConf {
-  echo "#### Creating /tmp/httpd.conf from template ./httpd.conf.tmpl"
-  renderTemplate "$templatePath" > "$fileName"
+function generateConf()
+{
+	echo "#### Creating $fileName from template $templateFile"
+	renderTemplate "$templatePath" > "$fileName"
 }
 
 generateConf
