@@ -7,9 +7,9 @@ branchName=$1
 serverName='$branchName.$siteName'
 serverAlias='www.$branchName.$siteName'
 documentRoot='/home/www/sis/$branchName/public'
-$templatePath='/etc/apache2/sites-available/sis-vhost.template'
+templatePath='/etc/apache2/sites-available/sis-vhost.template'
 
-$file='/etc/apache2/sites-available/$serverName.conf'
+fileName='/etc/apache2/sites-available/$serverName.conf'
 
 if [ ! -f "$templatePath" ]; then
 	echo "Apache template file not found"
@@ -27,7 +27,7 @@ function renderTemplate() {
     eval "echo \"$(cat $1)\""
 }
 
-if [[ ! renderTemplate $template > $file ]]; then
+if [[ ! renderTemplate $template > $fileName ]]; then
 	echo "Failed to create file template"
 	exit 1
 fi
