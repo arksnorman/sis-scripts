@@ -7,12 +7,17 @@ branchName=$1
 serverName="$branchName.$siteName"
 serverAlias="www.$branchName.$siteName"
 documentRoot="/home/www/sis/$branchName/public"
-templatePath="/etc/apache2/sites-available/sis-vhost.template"
-
+templateFile="/etc/apache2/sites-available/sis-vhost.template"
+siteIsEnabled="/etc/apache2/sites-enabled/$serverName.conf"
 fileName="/etc/apache2/sites-available/$serverName.conf"
 
-if [ ! -f "$templatePath" ]; then
-	echo "Apache template file not found"
+if [ -f "$siteIsEnabled" ]; then
+	echo "Site already enabled"
+	exit 0
+fi
+
+if [ ! -f "$templateFile" ]; then
+	echo "vhost template file not found"
 	exit 1
 fi
 
@@ -33,3 +38,7 @@ function generateConf {
 }
 
 generateConf
+
+a2ensite "$serverName.conf"
+
+service apache2 restart
