@@ -4,12 +4,12 @@ siteName=$2
 branchName=$1
 
 # Define the variables with values you want replaced
-serverName='$branchName.$siteName'
-serverAlias='www.$branchName.$siteName'
-documentRoot='/home/www/sis/$branchName/public'
-templatePath='/etc/apache2/sites-available/sis-vhost.template'
+serverName="$branchName.$siteName"
+serverAlias="www.$branchName.$siteName"
+documentRoot="/home/www/sis/$branchName/public"
+templatePath="/etc/apache2/sites-available/sis-vhost.template"
 
-fileName='/etc/apache2/sites-available/$serverName.conf'
+fileName="/etc/apache2/sites-available/$serverName.conf"
 
 if [ ! -f "$templatePath" ]; then
 	echo "Apache template file not found"
