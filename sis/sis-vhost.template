@@ -1,0 +1,27 @@
+<VirtualHost *:80>
+    ServerName $serverName
+    ServerAlias $serverAlias
+
+    DocumentRoot $documentRoot
+    <Directory $documentRoot>
+        AllowOverride All
+        Require all granted
+        Allow from All
+
+        <IfModule mod_rewrite.c>
+            Options -MultiViews
+            RewriteEngine On
+            RewriteCond %{REQUEST_FILENAME} !-f
+            RewriteRule ^(.*)$ index.php [QSA,L]
+        </IfModule>
+    </Directory>
+
+    # uncomment the following lines if you install assets as symlinks
+    # or run into problems when compiling LESS/Sass/CoffeeScript assets
+    # <Directory /var/www/project>
+    #     Options FollowSymlinks
+    # </Directory>
+
+    ErrorLog /var/log/apache2/$serverName_error.log
+    CustomLog /var/log/apache2/$serverName_access.log combined
+</VirtualHost>
