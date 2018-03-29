@@ -27,4 +27,9 @@ function renderTemplate() {
     eval "echo \"$(cat $1)\""
 }
 
-renderTemplate $template > $fileName
+function generateConf {
+  echo "#### Creating /tmp/httpd.conf from template ./httpd.conf.tmpl"
+  renderTemplate "$templatePath" > "$fileName"
+}
+
+generateConf
