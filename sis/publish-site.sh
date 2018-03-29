@@ -1,7 +1,7 @@
 #!/bin/bash
 
 siteName=$2
-branchName=$1
+branchName=$(echo $1 | sed -e 's/\.//g')
 
 # Define the variables with values you want replaced
 serverName="$branchName.$siteName"
