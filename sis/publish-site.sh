@@ -27,7 +27,4 @@ function renderTemplate() {
     eval "echo \"$(cat $1)\""
 }
 
-if [[ ! renderTemplate $template > $fileName ]]; then
-	echo "Failed to create file template"
-	exit 1
-fi
+renderTemplate $template > $fileName
