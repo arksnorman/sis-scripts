@@ -39,8 +39,8 @@ function generateConf()
 	renderTemplate "$templatePath" > "$fileName"
 }
 
-generateConf
-
-a2ensite "$serverName.conf"
+if [ generateConf ]; then
+    a2ensite "$serverName.conf"
+fi
 
 service apache2 restart
