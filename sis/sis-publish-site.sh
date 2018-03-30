@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 siteName=$2
 branchName=$(echo $1 | sed -e 's/\.//g')
@@ -21,22 +21,22 @@ if [ ! -f "$templateFile" ]; then
 	exit 1
 fi
 
-# This could also be read in via bash arguments. 
+# This could also be read in via bash arguments.
 # Google "bash getopts" for more information
 # render a template configuration file
 # expand variables + preserve formatting
 # user="Venkatt"
 # referenced inside the template.txt as $user
 # render_template /path/to/template.txt > path/to/configuration_file
-function renderTemplate() 
+function renderTemplate()
 {
     eval "echo \"$(cat $1)\""
 }
 
 function generateConf()
 {
-	echo "#### Creating $fileName from template $templateFile"
-	renderTemplate "$templatePath" > "$fileName"
+	echo "#### Creating vhost from template"
+	renderTemplate "$templateFile" > "$fileName"
 }
 
 if [ generateConf ]; then
