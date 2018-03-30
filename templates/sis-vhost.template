@@ -1,9 +1,9 @@
 <VirtualHost *:80>
-    ServerName $serverName
-    ServerAlias $serverAlias
+    ServerName serverName
+    ServerAlias serverAlias
 
-    DocumentRoot $documentRoot
-    <Directory $documentRoot>
+    DocumentRoot documentRoot
+    <Directory documentRoot>
         AllowOverride All
         Require all granted
         Allow from All
@@ -22,6 +22,6 @@
     #     Options FollowSymlinks
     # </Directory>
 
-    ErrorLog ${APACHE_LOG_DIR}/error.log
-    CustomLog ${APACHE_LOG_DIR}/access.log combined
+    ErrorLog ${APACHE_LOG_DIR}/serverName.error.log
+    CustomLog ${APACHE_LOG_DIR}/serverName.access.log combined
 </VirtualHost>
