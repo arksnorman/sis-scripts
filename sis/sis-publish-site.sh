@@ -12,35 +12,21 @@ siteIsEnabled="/etc/apache2/sites-enabled/$serverName.conf"
 fileName="/etc/apache2/sites-available/$serverName.conf"
 
 if [ -f "$siteIsEnabled" ]; then
-	echo "Site already enabled"
+	echo "Already enabled site"
 	exit 0
 fi
 
 if [ ! -f "$templateFile" ]; then
-	echo "vhost template file not found"
+	echo "Template file not found"
 	exit 1
 fi
 
-# This could also be read in via bash arguments.
-# Google "bash getopts" for more information
-# render a template configuration file
-# expand variables + preserve formatting
-# user="Venkatt"
-# referenced inside the template.txt as $user
-# render_template /path/to/template.txt > path/to/configuration_file
-function renderTemplate()
-{
-    eval "echo \"$(cat $1)\""
-}
+cp ${templateFile} ${fileName}
 
-function generateConf()
-{
-	echo "#### Creating vhost from template"
-	renderTemplate "$templateFile" > "$fileName"
-}
+sed -i "s/serverName/$serverName/g" ${fileName}
+sed -i "s/documentRoot/$documentRoot/g" ${fileName}
+sed -i "s/serverAlias/$serverAlias/g" ${fileName}
 
-if [ generateConf ]; then
-    a2ensite "$serverName.conf"
-fi
+cd "/etc/apache2/sites-available/" && a2ensite "$serverName.conf"
 
 service apache2 restart
