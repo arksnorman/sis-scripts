@@ -23,9 +23,9 @@ fi
 
 cp ${templateFile} ${fileName}
 
-sed -i "s/serverName/$serverName/g" ${fileName}
-sed -i "s/documentRoot/$documentRoot/g" ${fileName}
-sed -i "s/serverAlias/$serverAlias/g" ${fileName}
+sed -i "s|serverName|$serverName|g" ${fileName}
+sed -i "s|documentRoot|$documentRoot|g" ${fileName}
+sed -i "s|serverAlias|$serverAlias|g" ${fileName}
 
 cd "/etc/apache2/sites-available/" && a2ensite "$serverName.conf"
 
