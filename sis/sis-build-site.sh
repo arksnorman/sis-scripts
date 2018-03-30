@@ -4,8 +4,9 @@ baseDir='/home/www/sis/'
 
 branchName=$1
 repositoryUrl=$2
+cleanBranchName=$(echo $1 | sed -e 's/\.//g')
 
-fullDir="$baseDir$branchName"
+fullDir="$baseDir$cleanBranchName"
 
 if [ ! -d "$fullDir" ]; then
     mkdir -p "$fullDir" && cd "$fullDir" && git clone "repositoryUrl" .
